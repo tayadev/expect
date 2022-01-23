@@ -1,0 +1,15 @@
+#!/usr/bin/env use
+
+use '@gh/tayadev/ShellStuff:textstyle.sh'
+
+expect() {
+    result=$($1)
+    exitCode=$?
+
+    case $2 in
+        toBe) [ "$result" = "$3" ] || fail "Expected $cyan$1$reset to be $cyan$3$reset but got $cyan$result$reset";;
+        toExit) [ $exitCode -eq $3 ] || fail "Expected $cyan$1$reset to exit with exit code $cyan$3$reset, but got code $cyan$exitCode$reset";;
+    esac
+}
+
+fail() { echo "${red}× Test failed$reset - $1"; }
